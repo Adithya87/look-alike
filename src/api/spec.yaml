@@ -1,0 +1,48 @@
+openapi: 3.0.0
+
+info:
+  title: "lookalike"
+  version: "1.0"
+
+paths:
+  /ping:
+    get:
+      summary: Ping Endpoint
+      description: Ping Endpoint
+      operationId: api.app.ping
+      responses:
+        200:
+          description: ping response
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: "pong"
+  /find:
+    post:
+      summary: Finds your lookalike
+      description: Given a picture, find celebrities that looks most like the picture.
+      operationId: api.app.find_lookalike
+      requestBody:
+        required: true
+        content:
+          image/jpeg:
+            schema:
+              type: string
+              format: base64
+      responses:
+        200:
+          description: A set of celebrities that the given picture looks like.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    similarity:
+                      type: number
